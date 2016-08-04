@@ -1,0 +1,41 @@
+#----------------------------------------#
+# 参考                                   #
+# http://www.doxygen.jp/config.html      #
+#----------------------------------------#
+
+# Project
+PROJECT_NAME = MyProject
+OUTPUT_DIRECTORY = ./doxygen/
+OPTIMIZE_OUTPUT_FOR_C = YES
+# MARKDOWN_SUPPORT = YES
+# BUILTIN_STL_SUPPORT = YES
+
+# Build
+EXTRACT_ALL = YES
+EXTRACT_STATIC = YES
+# EXTRACT_PRIVATE = YES
+EXTRACT_LOCAL_CLASSES = YES
+EXTRACT_ANON_NSPACES = YES
+SHOW_INCLUDE_FILES = YES
+
+# Input
+# FILE_PATTERNS = *.c *.h
+RECURSIVE = YES
+
+# Browsing
+SOURCE_BROWSER = YES
+INLINE_SOURCE = YES
+GENERATE_TREEVIEW = YES
+GENERATE_LATEX = NO
+
+# Preprocessor
+MACRO_EXPANSION = YES
+SEARCH_INCLUDES = YES
+
+# Dot
+HAVE_DOT = YES
+DOT_CLEANUP = NO
+UML_LOOK = YES
+TEMPLATE_RELATIONS = YES
+CALL_GRAPH = YES
+CALLER_GRAPH = YES
