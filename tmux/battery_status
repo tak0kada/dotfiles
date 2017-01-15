@@ -2,34 +2,44 @@
 
 battery_info=`upower -i /org/freedesktop/UPower/devices/battery_BAT0`
 is_charging=`echo "$battery_info" | awk 'NR==12 {print $2}'`
-time_remain=`echo "$battery_info" | awk 'NR==20 {print $4 substr($5,0,1)}'`
-percentage=`echo "$battery_info" | awk 'NR==21 {print substr($2,0,length($2)-1)}'`
+time_remain=`echo "$battery_info" | awk 'NR==20 {print $4}'`
+time_unit=`echo "$battery_info" | awk 'NR==20 {print substr($5,0,1)}'`
+percentage=`echo "$battery_info" | awk 'NR==21 {print substr($2,0,length($2)-1)}' | xargs printf "%.0f"`
 
-#$1: is_charging
-charge_status() {
-	if [ $1 = "charging" ]; then
+#$is_charging
+display_charge_status() {
+	if [ $is_charging = "charging" ]; then
 		echo "▲ "
-	elif [ $1 = "discharging" ]; then
+	elif [ $is_charging = "discharging" ]; then
 		echo "▼ "
 	fi
 }
 
-#$1: percentage
-battery_status_color() {
-	if [ $1 -le 10 ]; then
+#$percentage
+set_color() {
+	if [ $percentage -le 10 ]; then
 		echo "colour196" #red
-	elif [ $1 -le 20 ]; then
+	elif [ $percentage -le 20 ]; then
 		echo "colour208" #orange
-	elif [ $1 -le 30 ]; then
+	elif [ $percentage -le 30 ]; then
 		echo "colour226" #yellow
-	elif [ $1 -lt 50 ]; then
+	elif [ $percentage -lt 50 ]; then
 		echo "colour20" #blue
 	else
 		echo "default" #green
 	fi
 }
 
-data="[Batt:"`charge_status $is_charging``printf "%.0f" $percentage`"% "${time_remain}"]"
-data="#[bg="`battery_status_color $percentage`"]"${data}"#[default]"
+#$time_remain, $time_unit 
+display_time() {
+	if [ $time_unit = "h" ]; then
+		echo `printf "%.1f" $time_remain`"h"
+	elif [ $time_unit = "m" ]; then
+		echo `printf "%.0f" $time_remain`"m"
+	fi
+}
+
+data="[Batt:"`display_charge_status`${percentage}"% "`display_time`"]"
+data="#[bg="`set_color`"]"${data}"#[default]"
 
 echo -e $data
