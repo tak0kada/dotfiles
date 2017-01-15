@@ -1,5 +1,0 @@
-#!/bin/bash
-
-time_remain=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | awk 'NR==20 {print $4}'`
-battery_percentage=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | awk 'NR==21 {print $2}'`
-echo $battery_percentage" "$time_remain"h"
