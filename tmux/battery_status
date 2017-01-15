@@ -8,9 +8,9 @@ percentage=`echo "$battery_info" | awk 'NR==21 {print substr($2,0,length($2)-1)}
 #$1: is_charging
 charge_status() {
 	if [ $1 = "charging" ]; then
-		echo "▼ "
-	elif [ $1 = "discharging" ]; then
 		echo "▲ "
+	elif [ $1 = "discharging" ]; then
+		echo "▼ "
 	fi
 }
 
