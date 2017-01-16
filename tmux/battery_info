@@ -21,12 +21,12 @@ set_color() {
 		echo "colour196" #red
 	elif [ $percentage -le 20 ]; then
 		echo "colour208" #orange
-	elif [ $percentage -le 30 ]; then
-		echo "colour226" #yellow
+	elif [ $percentage -lt 30 ]; then
+		echo "colour178" #yellow
 	elif [ $percentage -lt 50 ]; then
-		echo "colour20" #blue
+		echo "colour26" #blue
 	else
-		echo "default" #green
+		echo "colour2" #green
 	fi
 }
 
@@ -39,7 +39,7 @@ display_time() {
 	fi
 }
 
-data="[Batt:"`display_charge_status`${percentage}"% "`display_time`"]"
-data="#[bg="`set_color`"]"${data}"#[default]"
+ret="[Batt:"`display_charge_status`${percentage}"% "`display_time`"]"
+ret="#[bg="`set_color`"]"${ret}"#[bg=colour2]"
 
-echo -e $data
+echo -e $ret
