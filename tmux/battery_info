@@ -1,22 +1,28 @@
 #!/bin/bash
 
 battery_info=`upower -i /org/freedesktop/UPower/devices/battery_BAT0`
-is_charging=`echo "$battery_info" | awk 'NR==12 {print $2}'`
-time_remain=`echo "$battery_info" | awk 'NR==20 {print $4}'`
-time_unit=`echo "$battery_info" | awk 'NR==20 {print substr($5,0,1)}'`
-percentage=`echo "$battery_info" | awk 'NR==21 {print substr($2,0,length($2)-1)}' | xargs printf "%.0f"`
+is_charging=`echo "$battery_info" | grep 'state:' | awk '{print $2}'`
+time_remain=`echo "$battery_info" | grep 'time to' | awk '{print $4}'`
+time_unit=`echo "$battery_info" | grep 'time to' | awk '{print substr($5,0,1)}'`
+percentage=`echo "$battery_info" | grep 'percentage:' | awk '{print substr($2,0,length($2)-1)}' | xargs printf "%.0f"`
+if [ $percentage = 100 ]; then
+	time_remain="0";
+	time_unit="m";
+fi
 
 #$is_charging
-display_charge_status() {
-	if [ $is_charging = "charging" ]; then
-		echo "▲ "
-	elif [ $is_charging = "discharging" ]; then
-		echo "▼ "
-	fi
+is_charging_icon() {
+        if [ $is_charging = "charging" ]; then
+                echo "▲ "
+        elif [ $is_charging = "discharging" ]; then
+                echo "▼ "
+	elif [ $is_charging = "fully-charged" ]; then
+		echo "● "
+        fi
 }
 
 #$percentage
-set_color() {
+colour_code() {
 	if [ $percentage -le 10 ]; then
 		echo "colour196" #red
 	elif [ $percentage -le 20 ]; then
@@ -26,7 +32,7 @@ set_color() {
 	elif [ $percentage -lt 50 ]; then
 		echo "colour26" #blue
 	else
-		echo "colour2" #green
+		echo "colour112" #green
 	fi
 }
 
@@ -36,10 +42,12 @@ display_time() {
 		echo `printf "%.1f" $time_remain`"h"
 	elif [ $time_unit = "m" ]; then
 		echo `printf "%.0f" $time_remain`"m"
+	else
+		echo "?m"
 	fi
 }
 
-ret="[Batt:"`display_charge_status`${percentage}"% "`display_time`"]"
-ret="#[bg="`set_color`"]"${ret}"#[bg=colour2]"
+ret="[Batt:"`is_charging_icon`${percentage}"% "`display_time`"]"
+ret="#[fg="`colour_code`"]"${ret}"#[fg=default]"
 
-echo -e $ret
+echo "${ret}"
