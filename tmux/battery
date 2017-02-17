@@ -49,7 +49,7 @@ display_time() {
 	esac
 }
 
-ret="[Batt:"`is_charging_icon`${percentage}"% "`display_time`"]"
+ret="["`is_charging_icon`${percentage}"% "`display_time`"]"
 ret="#[fg="`colour_code`"]"${ret}"#[fg=default]"
 
 echo "${ret}"

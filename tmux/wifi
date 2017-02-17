@@ -1,0 +1,20 @@
+#!/bin/bash
+
+link_quality=`cat /proc/net/wireless | awk 'NR==3 {print substr($3,0,length($3)-1)}'`
+wifi_level=`echo "100*$link_quality/70" | bc`
+
+signals=(▃ ▅ ▇)
+signal=""
+
+for ((j = 0; j < "${#signals[@]}"; j++))
+do
+	if (( $j == 0 && $wifi_level > 25 )) ||
+	   (( $j == 1 && $wifi_level > 50 )) ||
+	   (( $j == 2 && $wifi_level > 75 )); then
+		signal="${signal}${signals[$j]}"
+	else
+		signal="${signal} "
+	fi
+done
+
+echo "[""$signal""]"
