@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=mozc Dictionary Tool
+Comment=Set Up Mozc Dictionary
+Name[ja]=Mozc辞書の設定
+Exec=/usr/lib/mozc/mozc_tool --mode=dictionary_tool
+Terminal=false
+Type=Application
+Keywords=mozc;
+StartupNotify=false
+Icon=/home/tak0kada/dotfiles/mozc/for-gnome3/mozc.png
+Categories=Settings;Utility;
+X-Desktop-File-Install-Version=0.22
+StartupWMClass=mozc.dict.config

@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Mozc Setup
+Name[ja]=Mozc の設定
+Comment=Set Up Mozc Engine
+Comment[ja]=Mozcエンジンを設定します
+Exec=/usr/lib/mozc/mozc_tool --mode=config_dialog
+Terminal=false
+Type=Application
+Keywords=mozc;
+StartupNotify=false
+Icon=/home/tak0kada/dotfiles/mozc/for-gnome3/mozc.png
+Categories=Settings;Utility;
+X-Desktop-File-Install-Version=0.22
+StartupWMClass=mozc.tools.config

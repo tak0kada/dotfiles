@@ -26,7 +26,7 @@ PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
 #---------------
 # aliases
 #---------------
-alias ls='ls --color=auto'
+alias ls='ls --color -h --group-directories-first'
 alias vim='nvim'
 alias R='R --vanilla --no-save --quiet'
 alias r='R --vanilla --no-save --quiet'
@@ -39,6 +39,7 @@ function share_history {
     history -c
     history -r
 }
-PROMPT_COMMAND='share_history'
-shopt -u histappend
+export PROMPT_COMMAND='share_history'
+export HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
 export HISTSIZE=10000
