@@ -17,6 +17,7 @@ export QT_IM_MODULE=fcitx
 #---------------
 alias ls='ls --color -h --group-directories-first'
 alias vim='nvim'
+alias vi='nvim'
 alias R='R --vanilla --no-save --quiet'
 alias r='R --vanilla --no-save --quiet'
 
@@ -34,6 +35,7 @@ PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
 #---------------
 # HISTORY
 #---------------
+# share history between several running terminal
 function share_history {
     history -a
     history -c
@@ -47,17 +49,21 @@ export HISTSIZE=10000
 #---------------
 # TMUX
 #---------------
-# if not in tmux
-if [ -z "$TMUX" ]; then
+# run tmux on the start up of terminal-emulator
+if [ -z "$TMUX" ]; then # if not in tmux
+    # if no session exists, start new session
     if [ "`tmux ls | cut -c 1-2`" = "no" ]; then
         tmux new-session && exit
     fi
 
     detached="`tmux ls | grep -Ev 'attached'`"
+
+    # when some tmux session already existing, but all attached
     if [ -z "$detached" ]; then
         tmux new-session && exit
     fi
 
+    # when some tmux session available, you can choose
     choices="${detached}\nc: create new session"
     ID=`echo -e "$choices" | peco | cut -d ':' -f 1`
     if [[ $ID =~ [0-9]+ ]]; then
