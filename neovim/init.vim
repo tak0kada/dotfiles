@@ -5,7 +5,7 @@ set nocompatible
 set history=10000
 set mouse=
 " set clipboard^=unnamed,unnamedplus
-" set noswapfile
+set noswapfile
 
 
 "-------------------------
@@ -49,6 +49,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'cohama/lexima.vim'
     Plug 'tyru/caw.vim'
+
+    " dependency for language plugins
     Plug 'thinca/vim-quickrun'
     Plug 'Shougo/vimproc'
     Plug 'Shougo/unite.vim'
@@ -57,7 +59,7 @@ call plug#begin('~/.config/nvim/plugged')
     " Plug 'scrooloose/nerdtree'
     " Plug 'jistr/vim-nerdtree-tabs'
 
-    " c++
+    " C++
     " Plug 'Valloric/YouCompleteMe', {'for': 'cpp', 'do': function('BuildYCM')}
     Plug 'Valloric/YouCompleteMe', {'for': 'cpp'}
     autocmd! User YouCompleteMe
@@ -67,6 +69,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'rdnetto/YCM-Generator', {'branch': 'stable', 'for': 'cpp'}
     Plug 'osyo-manga/unite-boost-online-doc' , {'for': 'cpp'}
 
+    " Python
+
+    " R
+
 call plug#end()
 
 
@@ -75,10 +81,10 @@ call plug#end()
 "-------------------------
 """"" vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
 
 """"" vim-trailing-whitespace
 augroup space
@@ -134,6 +140,8 @@ vnoremap <Space>d "+d
 vnoremap <Space>x "+x
 nnoremap <Space>p "+p
 vnoremap <Space>p "+p
+nnoremap <Space>P "+P
+vnoremap <Space>P "+P
 " comment / uncomment
 nmap ,c <Plug>(caw:hatpos:toggle)
 vmap ,c <Plug>(caw:hatpos:toggle)
