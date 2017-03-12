@@ -74,20 +74,23 @@ call plug#begin('~/.config/nvim/plugged')
 
     " R
 
+    " Documentation
+    " Plug 'rhysd/devdocs.vim'
+    Plug 'KabbAmine/zeavim.vim', {'on': [
+            \   'Zeavim', 'Docset',
+            \   '<Plug>Zeavim',
+            \   '<Plug>ZVVisSelection',
+            \   '<Plug>ZVKeyDocset',
+            \   '<Plug>ZVMotion'
+            \ ]}
+
+
 call plug#end()
 
 
 "-------------------------
 " PLUGIN SETTINGS
 "-------------------------
-""""" vim-tmux-navigator
-" seamless pane moving between vim and tmux
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
-nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
-nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
-nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
-
 """"" vim-trailing-whitespace
 " erase white space at the end of the line
 augroup space
@@ -100,33 +103,17 @@ augroup END
 let g:lexima_enable_basic_rules = 1
 let g:lexima_enable_newline_rules = 1
 
-""""" caw.vim
-" comment out line by typing ,c
-
-""""" vim-surround
-" surround selected text by typing S", S', S{, S<b>, etc.
-" unsurround text by typing ds', etc.
-" change surrounding by typing cs', etc.
-
 """"" YouCompleteMe
-" completion by C-p, selection by C-n, C-p, choosing by C-y, Enter
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/neovim/plugins/YouCompleteMe/ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion=1
 
 """"" cppman
-" search by typing Shift-K
 augroup cppmanref
     autocmd VimEnter * call system("cppman -s cppreference.com")
     autocmd VimLeave * call system("cppman -s cplusplus.com")
 augroup END
-
 autocmd FileType cpp set keywordprg=cppman
-" command! -nargs=+ Cppman silent! call system("tmux split-window -bh cppman " . expand(<q-args>))
-" http://ja.stackoverflow.com/questions/33212
-command! -nargs=+ Cppman silent! call system("/home/tak0kada/dotfiles/neovim/plugins/cppman/tmux-cppman " . expand(<q-args>))
-autocmd FileType cpp nnoremap <silent><buffer> K <Esc>:Cppman <cword><CR>
-autocmd FileType cpp vnoremap <silent><buffer> K <Esc>:Cppman <cword><CR>
 
 """"" watchdogs
 " needed by YouCompleteMe
@@ -167,6 +154,43 @@ vmap ,c <Plug>(caw:hatpos:toggle)
 nnoremap <Esc><Esc> :noh<CR>
 " do not use ex mode
 nnoremap Q <Nop>
+
+""""" vim-tmux-navigator
+" seamless pane moving between vim and tmux
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
+nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
+nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
+
+""""" caw.vim
+" comment out line by typing ,c
+
+""""" vim-surround
+" surround selected text by typing S", S', S{, S<b>, etc.
+" unsurround text by typing ds', etc.
+" change surrounding by typing cs', etc.
+
+""""" YouCompleteMe
+" completion by C-p, selection by C-n, C-p, choosing by C-y, Enter
+
+""""" cppman
+" search by typing shift-k
+" http://ja.stackoverflow.com/questions/33212
+command! -nargs=+ Cppman silent! call system("/home/tak0kada/dotfiles/neovim/plugins/cppman/tmux-cppman " . expand(<q-args>))
+autocmd FileType cpp nnoremap <silent><buffer> K <Esc>:Cppman <cword><CR>
+autocmd FileType cpp vnoremap <silent><buffer> K <Esc>:Cppman <cword><CR>
+
+""""" zeavim.vim
+" search for document out side of vim, in the stand alone application zeal
+nmap gz <Plug>Zeavim           " <leader>z (NORMAL mode)
+vmap gz <Plug>ZVVisSelection   " <leader>z (VISUAL mode)
+" nmap gzz <Plug>ZVMotion          " gz{motion} (NORMAL mode)
+" nmap gZ <Plug>ZVKeyDocset       " <leader><leader>z
+
+""""" devdocs.vim
+" search for document onside of vim, in the webbrowser
+" autocmd Filetype nmap K <Plug>(devdocs-under-cursor)
 
 
 "-------------------------

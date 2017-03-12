@@ -4,6 +4,11 @@
         "C-p": "peco.SelectUp",
         "C-f": "peco.ScrollPageDown",
         "C-b": "peco.ScrollPageUp"
+    },
+    "Style": {
+        "Basic": ["on_default", "white"],
+        "Selected": ["on_yellow", "white"],
+        "Matched": ["reverse", "on_black"]
     }
 }
 
