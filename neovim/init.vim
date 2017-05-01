@@ -208,15 +208,17 @@ set showmatch
 "-------------------------
 syntax on
 set number
-" show cursor position(automatically enabled by lightline)
-set ruler
-" set cursorline
 
 set background=dark
 colorscheme kalisi
 " colorscheme hybrid
 " colorscheme molokai
 " colorscheme solarized8_dark_low
+
+" color the line which the cursor is on
+set cursorline
+highlight LineNr ctermfg=241
+highlight CursorLineNr ctermfg=233 ctermbg=0 cterm=NONE
 
 set tabstop=8 shiftwidth=4 expandtab smartindent
 " print line at 80th caracter from left
