@@ -137,6 +137,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
+nnoremap <C-h> <Nop>
 " copy / cut to system clipboard
 nnoremap <Space>y "+y
 nnoremap <Space>d "+d
@@ -164,7 +165,7 @@ nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
 nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
 
 """"" caw.vim
-" comment out line by typing ,c
+" comment out lines by typing ,c
 
 """"" vim-surround
 " surround selected text by typing S", S', S{, S<b>, etc.
