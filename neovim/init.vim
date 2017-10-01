@@ -163,6 +163,10 @@ nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
 nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
 nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
 nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
+inoremap <silent> <M-j> :TmuxNavigateDown<CR>
+inoremap <silent> <M-k> :TmuxNavigateUp<CR>
+inoremap <silent> <M-h> :TmuxNavigateLeft<CR>
+inoremap <silent> <M-l> :TmuxNavigateRight<CR>
 
 """"" caw.vim
 " comment out lines by typing ,c
