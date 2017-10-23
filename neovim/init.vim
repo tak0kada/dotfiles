@@ -13,8 +13,8 @@ set noswapfile
 "-------------------------
 " automatic installation of vim-plug itself
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall
 endif
 
@@ -130,6 +130,8 @@ let g:quickrun_config["watchdogs_checker/_"] = {
 "-------------------------
 let mapleader = "\<Space>"
 inoremap <silent> jj <ESC>
+inoremap <silent> っj <ESC>
+inoremap <silent> っｊ <ESC>
 inoremap <silent> kk <ESC>
 inoremap <silent> hh <ESC>
 nnoremap ; :
@@ -163,10 +165,10 @@ nnoremap <silent> <M-j> :TmuxNavigateDown<CR>
 nnoremap <silent> <M-k> :TmuxNavigateUp<CR>
 nnoremap <silent> <M-h> :TmuxNavigateLeft<CR>
 nnoremap <silent> <M-l> :TmuxNavigateRight<CR>
-inoremap <silent> <M-j> :TmuxNavigateDown<CR>
-inoremap <silent> <M-k> :TmuxNavigateUp<CR>
-inoremap <silent> <M-h> :TmuxNavigateLeft<CR>
-inoremap <silent> <M-l> :TmuxNavigateRight<CR>
+inoremap <silent> <M-j> <Esc>:TmuxNavigateDown<CR>
+inoremap <silent> <M-k> <Esc>:TmuxNavigateUp<CR>
+inoremap <silent> <M-h> <Esc>:TmuxNavigateLeft<CR>
+inoremap <silent> <M-l> <Esc>:TmuxNavigateRight<CR>
 
 """"" caw.vim
 " comment out lines by typing ,c
@@ -213,6 +215,7 @@ set showmatch
 "-------------------------
 syntax on
 set number
+set guicursor=
 
 set background=dark
 colorscheme kalisi
@@ -264,7 +267,7 @@ endif
 " endif
 
 " lightline print information at the bottom low
-set guifont=Ricty\ 10
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Regular
 set laststatus=2
 set noshowmode
 let g:lightline = {

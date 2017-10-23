@@ -1,1 +1,1 @@
-ln ~/dotfiles/lilyterm/default.conf ~/.config/lilyterm/default.conf
+ln -s ~/dotfiles/lilyterm/default.conf ~/.config/lilyterm/default.conf

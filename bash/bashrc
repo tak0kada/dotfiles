@@ -5,6 +5,9 @@
 BROWSER=/usr/bin/chromium
 EDITOR=/usr/bin/nvim
 
+# Use English in terminal
+export LANG="en_US.UTF-8"
+
 #---------------
 # FCITX
 #---------------
