@@ -19,15 +19,15 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 " post-install function for YouCommpleteMe
-" function! BuildYCM(info)
-"   " info is a dictionary with 3 fields
-"   " - name:   name of the plugin
-"   " - status: 'installed', 'updated', or 'unchanged'
-"   " - force:  set on PlugInstall! or PlugUpdate!
-"   if a:info.status == 'installed' || a:info.force
-"     !./install.py --all
-"   endif
-" endfunction
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --all
+  endif
+endfunction
 
 call plug#begin('~/.config/nvim/plugged')
     " :PlugInstall -> install plugins
@@ -61,8 +61,8 @@ call plug#begin('~/.config/nvim/plugged')
     " Plug 'jistr/vim-nerdtree-tabs'
 
     " C++
-    " Plug 'Valloric/YouCompleteMe', {'for': 'cpp', 'do': function('BuildYCM')}
-    Plug 'Valloric/YouCompleteMe', {'for': 'cpp'}
+    " update YouCompleteMe when :PlugUpdate! is called (not when ! is not added)
+    Plug 'Valloric/YouCompleteMe', {'for': ['cpp', 'python', 'rust'], 'do': function('BuildYCM')}
     autocmd! User YouCompleteMe
     \ if !has('vim_starting') |
         \ call youcompleteme#Enable() |
@@ -130,15 +130,26 @@ let g:quickrun_config["watchdogs_checker/_"] = {
 "-------------------------
 let mapleader = "\<Space>"
 inoremap <silent> jj <ESC>
-inoremap <silent> っj <ESC>
 inoremap <silent> っｊ <ESC>
 inoremap <silent> kk <ESC>
 inoremap <silent> hh <ESC>
 nnoremap ; :
 nnoremap j gj
 nnoremap k gk
+nnoremap 0 g0
+nnoremap $ g$
 nnoremap gj j
 nnoremap gk k
+nnoremap g0 0
+nnoremap g$ $
+vnoremap j gj
+vnoremap k gk
+vnoremap 0 g0
+vnoremap $ g$
+vnoremap gj j
+vnoremap gk k
+vnoremap g0 0
+vnoremap g$ $
 nnoremap <C-h> <Nop>
 " copy / cut to system clipboard
 nnoremap <Space>y "+y
